@@ -24,5 +24,26 @@ class BaseDados:
     def imprimir_dados(self: object) -> None:
         return self.__basedados.head()
 
+    @property
+    def descricao_base_dados(self: object) -> None:
+        return self.__basedados.describe()
+
+    @property
+    def media_movel(self: object) -> None:
+        return self.__basedados['Close'].rolling(12).mean()
+
+    @property
+    def tendencia(self: object) -> None:
+        return self.__basedados['Close'].rolling(30).mean()
+
+    @property
+    def dados_fechamento(self: object) -> None:
+        return self.__basedados['Close'].diff().groupby(self.__basedados.index.month).mean()
+
+    def dados_mes(self: object) -> None:
+        return self.__basedados.index.month
+
+
+
 
 
