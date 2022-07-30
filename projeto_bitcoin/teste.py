@@ -1,3 +1,5 @@
-from projeto_bitcoin.plot_graphics.graphics import *
+from projeto_bitcoin.classes import BaseDados
 
-print(type(graphics_line()))
+d = BaseDados('BTC-USD.csv')
+
+print(d.media_movel)

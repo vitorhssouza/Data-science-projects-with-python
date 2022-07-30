@@ -14,17 +14,6 @@ from projeto_bitcoin.classes import BaseDados
 from modulos.funcoes import *
 
 
-
-# reading the file
-#bitcoin_data = pd.read_csv('BTC-USD.csv')
-
-# Passing Date column to datetime type
-#bitcoin_data['Date'] = pd.to_datetime(bitcoin_data['Date'])
-
-# Indexando a coluna date
-#bitcoin_data.set_index('Date', inplace=True)
-
-
 def main():
     menu()
 

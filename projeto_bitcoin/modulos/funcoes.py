@@ -9,48 +9,111 @@ import plotly.express as px
 
 dados = BaseDados('BTC-USD.csv')
 
-def menu():
+
+def linha(tamanho: int = 60) -> int:
+    print(tamanho * '=')
+
+
+def menu() -> None:
+    linha()
+    print('GRÁFICO DE ANÁLISE DE FECHAMENTO DO BITCOIN \n'
+           'DURANTE O PERÍODO DE 27/07/2017 ATÉ 27/07/2022'.center(60))
+    linha()
+    print('1  - TABELA\n'
+          '2  - DESCRIÇÃO DA BASE DE DADOS\n'
+          '3  - PLOTAGEM DO GRÁFICO DE LINHA\n'
+          '4  - PLOTAGEM DO GRÁFICO DE LINHA COM MÉDIA MÓVEL DE 12 DIAS\n'
+          '5  - PLOTAGEM DO GRÁFICO DE LINHA COM TENDÊNCIA DE 30 DIAS\n'
+          '6  - PLOTAGEM GRÁFICO DE LINHA COM A MÉDIA MÓVEL E TENDÊNCIA\n'
+          '7  - PLOTAGEM DO GRAFICO DE BARRA\n'
+          '8  - PLOTAGEM DO GRAFICO HISTOGRAMA\n'
+          '9  - PLOTAGEM DO GRÁFICO BOXPLOT\n'
+          '10 - SAIR DO SISTEMA ')
+
+    opcao: int = int(input('Informe sua opção: '))
+    escolha_opcao(opcao)
+
+
+def escolha_opcao(opcao: int) -> None:
     """
-    Função menu
+    Função escolha
     :return: O que o usuario solicitou
     """
-    print(40 * '-=-')
-    print(('GRÁFICO DE ANÁLISE DE FECHAMENTO DO BITCOIN \n'
-          'DURANTE O PERÍODO DE 27/07/2017 ATÉ 27/07/2022').center(40))
-    print(40 * '-=-')
-    print('1 - PLOTAGEM DO GRÁFICO DE LINHA\n'
-          '2 - PLOTAGEM DO GRÁFICO DE LINHA COM MÉDIA MÓVEL DE 12 DIAS\n'
-          '3 - PLOTAGEM DO GRÁFICO DE LINHA COM TENDÊNCIA DE 30 DIAS\n'
-          '4 - PLOTAGEM GRÁFICO DE LINHA COM A MÉDIA MÓVEL E TENDÊNCIA\n'
-          '5 - PLOTAGEM DO GRAFICO DE BARRA\n'
-          '6 - PLOTAGEM DO GRAFICO HISTOGRAMA\n'
-          '7 - PLOTAGEM DO GRÁFICO BOXPLOT\n'
-          '8 - SAIR DO SISTEMA ')
-    while True:
-        opcao: int = int(input('Informe sua opção: '))
-        if opcao == 1:
-            grafico_linha()
-            print('Plotando o gráfico de linha')
-            sleep(0.5)
-        elif opcao == 2:
-            pass
-        elif opcao == 3:
-            pass
-        elif opcao == 4:
-            pass
-        elif opcao == 5:
-            pass
-        elif opcao == 6:
-            pass
-        elif opcao == 7:
-            pass
-        elif opcao == 8:
-            print('Saindo do sistema')
-            sleep(0.5)
-            break
-        else:
-            print('Opção inválida..')
-            sleep(0.2)
+    #while True:
+
+    if opcao == 1:
+        linha()
+        print('Imprimindo a tabela ')
+        sleep(0.5)
+        print(dados.basedados)
+        sleep(4)
+        print('Retornando ao menu inicial')
+        sleep(0.5)
+        menu()
+    elif opcao == 2:
+        linha()
+        print('Imprimindo descrição da base de dados')
+        sleep(4)
+        print(dados.descricao_base_dados)
+        print('Retornando ao menu inicial')
+        sleep(0.5)
+        menu()
+    elif opcao == 3:
+        print('Plotando o gráfico de linha')
+        grafico_linha()
+        sleep(4)
+        print('Retornando ao menu inicial')
+        sleep(0.5)
+        menu()
+    elif opcao == 4:
+        print('Plotando o gráfico de média móvel de 12 dias.')
+        grafico_media_movel()
+        sleep(4)
+        print('Retornando ao menu inicial')
+        sleep(0.5)
+        menu()
+    elif opcao == 5:
+        print('Plotando o gráfico de têndencia de 30 dias.')
+        grafico_tendencia()
+        sleep(4)
+        print('Retornando ao menu inicial')
+        sleep(0.5)
+        menu()
+    elif opcao == 6:
+        print('Plotando o gráfico de têndencia de 30 dias.')
+        grafico()
+        sleep(4)
+        print('Retornando ao menu inicial')
+        sleep(0.5)
+        menu()
+    elif opcao == 7:
+        print('Plotando o gráfico de barra.')
+        grafico_bar()
+        sleep(4)
+        print('Retornando ao menu inicial')
+        sleep(0.5)
+        menu()
+    elif opcao == 8:
+        print('Plotando o gráfico de barra.')
+        grafico_histograma()
+        sleep(4)
+        print('Retornando ao menu inicial')
+        sleep(0.5)
+        menu()
+    elif opcao == 9:
+        print('Plotando o gráfico de barra.')
+        grafico_box()
+        sleep(4)
+        print('Retornando ao menu inicial')
+        sleep(0.5)
+        menu()
+    elif opcao == 10:
+        print('Saindo do sistema')
+        sleep(0.5)
+        exit()
+    else:
+        print('Opção inválida..')
+        sleep(0.2)
 
 
 def grafico_linha():
@@ -59,6 +122,38 @@ def grafico_linha():
        """
     grafico = px.line(dados.basedados, y='Close')
     return layout_linha(grafico)
+
+
+def grafico_media_movel() -> None:
+    grafico_linha_media = px.line(dados.media_movel)
+    layout_linha(grafico_linha_media)
+
+
+def grafico_tendencia() -> None:
+    grafico_linha_tendencia = px.line(dados.tendencia)
+    layout_linha(grafico_linha_tendencia)
+
+
+def grafico() -> None:
+    dados.basedados['Média Móvel'] = dados.media_movel
+    dados.basedados['Tendência'] = dados.tendencia
+    grafico = px.line(dados.basedados[['Close', 'Média Móvel', 'Tendência']])
+    layout_linha(grafico)
+
+
+def grafico_bar() -> None:
+    grafico_barra = px.bar(dados.dados_fechamento)
+    layout_bar(grafico_barra)
+
+
+def grafico_histograma() -> None:
+    grafico_hist = px.histogram(dados.basedados, x=dados.basedados['Close'])
+    layout_histo(grafico_hist)
+
+
+def grafico_box() -> None:
+
+    px.box(dados.basedados, x=dados.dados_mes(), y='Close')
 
 
 def layout_linha(grafico):
