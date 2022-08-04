@@ -8,24 +8,14 @@ from projeto_bitcoin.Analise_bitcoin import *
 from projeto_bitcoin.modulos.moduls_graphics import *
 
 
-<<<<<<< HEAD
-
-def linha(tamanho: int = 60) -> int:
-=======
 def linha(tamanho: int = 90) -> int:
->>>>>>> developer
     print(tamanho * '=')
 
 
 def menu() -> None:
     linha()
-<<<<<<< HEAD
-    print('GRÁFICO DE ANÁLISE DE FECHAMENTO DO BITCOIN \n'
-           'DURANTE O PERÍODO DE 27/07/2017 ATÉ 27/07/2022'.center(60))
-=======
     print('GRÁFICO DE ANÁLISE DE FECHAMENTO DO BITCOIN'.center(90))
     print('DURANTE O PERÍODO DE 27/07/2017 ATÉ 27/07/2022'.center(90))
->>>>>>> developer
     linha()
     print('1  - TABELA\n'
           '2  - DESCRIÇÃO DA BASE DE DADOS\n'
@@ -47,11 +37,6 @@ def escolha_opcao(opcao: int) -> None:
     Função escolha
     :return: O que o usuario solicitou
     """
-<<<<<<< HEAD
-    #while True:
-
-=======
->>>>>>> developer
     if opcao == 1:
         linha()
         print('Imprimindo a tabela ')
@@ -112,11 +97,8 @@ def escolha_opcao(opcao: int) -> None:
         sleep(0.5)
         menu()
     elif opcao == 9:
-<<<<<<< HEAD
         print('Plotando o gráfico de barra.')
-=======
         print('Plotando o gráfico Boxplot.')
->>>>>>> developer
         grafico_box()
         sleep(4)
         print('Retornando ao menu inicial')
@@ -129,49 +111,8 @@ def escolha_opcao(opcao: int) -> None:
     else:
         print('Opção inválida..')
         sleep(0.2)
-<<<<<<< HEAD
+        menu()
 
-
-def grafico_linha():
-    """
-       Nessa função foi realizado uma plotagem do fechamento do preço do bitcoin
-       """
-    grafico = px.line(dados.basedados, y='Close')
-    return layout_linha(grafico)
-=======
->>>>>>> developer
-
-
-def grafico_media_movel() -> None:
-    grafico_linha_media = px.line(dados.media_movel)
-    layout_linha(grafico_linha_media)
-
-
-def grafico_tendencia() -> None:
-    grafico_linha_tendencia = px.line(dados.tendencia)
-    layout_linha(grafico_linha_tendencia)
-
-
-def grafico() -> None:
-    dados.basedados['Média Móvel'] = dados.media_movel
-    dados.basedados['Tendência'] = dados.tendencia
-    grafico = px.line(dados.basedados[['Close', 'Média Móvel', 'Tendência']])
-    layout_linha(grafico)
-
-
-def grafico_bar() -> None:
-    grafico_barra = px.bar(dados.dados_fechamento)
-    layout_bar(grafico_barra)
-
-
-def grafico_histograma() -> None:
-    grafico_hist = px.histogram(dados.basedados, x=dados.basedados['Close'])
-    layout_histo(grafico_hist)
-
-
-def grafico_box() -> None:
-
-    px.box(dados.basedados, x=dados.dados_mes(), y='Close')
 
 
 def layout_linha(grafico):
