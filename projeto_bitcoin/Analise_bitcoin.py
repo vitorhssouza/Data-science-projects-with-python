@@ -7,10 +7,7 @@
 https://br.financas.yahoo.com/quote/BTC-USD/history?period1=1501113600&period2=1658880000&interval=1d&filter=history&frequency=1d&includeAdjustedClose=true
 
 """
-
 # importing libraries
-import pandas as pd
-from projeto_bitcoin.classes import BaseDados
 from modulos.funcoes import *
 
 
