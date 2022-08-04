@@ -41,12 +41,9 @@ class BaseDados:
         return self.__basedados['Close'].diff().groupby(self.__basedados.index.month).mean()
 
     def dados_mes(self: object) -> None:
-<<<<<<< HEAD
-        return self.__basedados.index.month
-=======
         self.__basedados['Months'] = self.__basedados.index.month
         return self.__basedados['Months']
->>>>>>> developer
+
 
 
 
