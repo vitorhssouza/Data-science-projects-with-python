@@ -117,6 +117,7 @@ def layout_linha(grafico):
        Essa função da um nome de título ao gráfico,
        nome aos eixos x e y do gráfico e
        altera o tamanho da fonte"""
+
     grafico.update_layout(
         dict(title='Ánalise de Fechamento Bitcoin', titlefont_size=25),
         xaxis=dict(title='Período Histórico', titlefont_size=18, tickfont_size=12),
@@ -131,6 +132,7 @@ def layout_bar(grafico):
         Essa função da um nome de título ao gráfico,
         nome aos eixos x e y do gráfico e
         altera o tamanho da fonte"""
+
     grafico.update_layout(
                         dict(title='Análise mensal de fechamento do bitcoin'),
                         titlefont_size=25,
@@ -145,6 +147,7 @@ def layout_histo(grafico):
         Essa função da um nome de título ao gráfico,
         nome aos eixos x e y do gráfico e
         altera o tamanho da fonte"""
+
     grafico.update_layout(
                       dict(title='Ánalise de Frequência do Bitcoin', titlefont_size=25),
                       xaxis=dict(title='Preço Histórico $', titlefont_size=18, tickfont_size=12),
@@ -157,6 +160,7 @@ def layout_box(grafico):
         Essa função da um nome de título ao gráfico,
         nome aos eixos x e y do gráfico e
         altera o tamanho da fonte"""
+
     grafico.update_layout(
         dict(title='Ánalise de variação de preço de fechamento do Bitcoin', titlefont_size=25),
         xaxis=dict(title='Meses', titlefont_size=18, tickfont_size=12),

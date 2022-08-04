@@ -1,5 +1,5 @@
 """
-Classes que ira receber a base de dados que iremos estudar.
+Classes que irá receber a base de dados que iremos estudar.
 """
 import pandas as pd
 
