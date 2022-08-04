@@ -2,22 +2,20 @@
 Aqui encontramos as funções que iremos utilizar nas plotagem dos graficos
 
 """
+
 from time import sleep
-from projeto_bitcoin.classes import *
 from projeto_bitcoin.Analise_bitcoin import *
-import plotly.express as px
-
-dados = BaseDados('BTC-USD.csv')
+from projeto_bitcoin.modulos.moduls_graphics import *
 
 
-def linha(tamanho: int = 60) -> int:
+def linha(tamanho: int = 90) -> int:
     print(tamanho * '=')
 
 
 def menu() -> None:
     linha()
-    print('GRÁFICO DE ANÁLISE DE FECHAMENTO DO BITCOIN \n'
-           'DURANTE O PERÍODO DE 27/07/2017 ATÉ 27/07/2022'.center(60))
+    print('GRÁFICO DE ANÁLISE DE FECHAMENTO DO BITCOIN'.center(90))
+    print('DURANTE O PERÍODO DE 27/07/2017 ATÉ 27/07/2022'.center(90))
     linha()
     print('1  - TABELA\n'
           '2  - DESCRIÇÃO DA BASE DE DADOS\n'
@@ -39,8 +37,6 @@ def escolha_opcao(opcao: int) -> None:
     Função escolha
     :return: O que o usuario solicitou
     """
-    #while True:
-
     if opcao == 1:
         linha()
         print('Imprimindo a tabela ')
@@ -101,7 +97,7 @@ def escolha_opcao(opcao: int) -> None:
         sleep(0.5)
         menu()
     elif opcao == 9:
-        print('Plotando o gráfico de barra.')
+        print('Plotando o gráfico Boxplot.')
         grafico_box()
         sleep(4)
         print('Retornando ao menu inicial')
@@ -116,56 +112,25 @@ def escolha_opcao(opcao: int) -> None:
         sleep(0.2)
 
 
-def grafico_linha():
-    """
-       Nessa função foi realizado uma plotagem do fechamento do preço do bitcoin
-       """
-    grafico = px.line(dados.basedados, y='Close')
-    return layout_linha(grafico)
-
-
-def grafico_media_movel() -> None:
-    grafico_linha_media = px.line(dados.media_movel)
-    layout_linha(grafico_linha_media)
-
-
-def grafico_tendencia() -> None:
-    grafico_linha_tendencia = px.line(dados.tendencia)
-    layout_linha(grafico_linha_tendencia)
-
-
-def grafico() -> None:
-    dados.basedados['Média Móvel'] = dados.media_movel
-    dados.basedados['Tendência'] = dados.tendencia
-    grafico = px.line(dados.basedados[['Close', 'Média Móvel', 'Tendência']])
-    layout_linha(grafico)
-
-
-def grafico_bar() -> None:
-    grafico_barra = px.bar(dados.dados_fechamento)
-    layout_bar(grafico_barra)
-
-
-def grafico_histograma() -> None:
-    grafico_hist = px.histogram(dados.basedados, x=dados.basedados['Close'])
-    layout_histo(grafico_hist)
-
-
-def grafico_box() -> None:
-
-    px.box(dados.basedados, x=dados.dados_mes(), y='Close')
-
-
 def layout_linha(grafico):
+    """Função para alterar o layout do gráfico de linha.
+       Essa função da um nome de título ao gráfico,
+       nome aos eixos x e y do gráfico e
+       altera o tamanho da fonte"""
     grafico.update_layout(
         dict(title='Ánalise de Fechamento Bitcoin', titlefont_size=25),
         xaxis=dict(title='Período Histórico', titlefont_size=18, tickfont_size=12),
-        yaxis=dict(title='Preço Fechamento ($)', titlefont_size=18, tickfont_size=12))
+        yaxis=dict(title='Preço Fechamento ($)', titlefont_size=18, tickfont_size=12),
+        )
 
     return grafico.show()
 
 
 def layout_bar(grafico):
+    """ Função para alterar o layout do gráfico de barra.
+        Essa função da um nome de título ao gráfico,
+        nome aos eixos x e y do gráfico e
+        altera o tamanho da fonte"""
     grafico.update_layout(
                         dict(title='Análise mensal de fechamento do bitcoin'),
                         titlefont_size=25,
@@ -175,18 +140,26 @@ def layout_bar(grafico):
     return grafico.show()
 
 
-def layout_bar_volume(grafico):
-    grafico.update_layout(
-                        dict(title='Análise Mensal de Volume do Bitcoin'), titlefont_size=25,
-                        xaxis=dict(title='Período Mensal', titlefont_size=18, tickfont_size=12),
-                        yaxis=dict(title='Variação da Média de Volume', titlefont_size=18, tickfont_size = 12)
-                        )
-    return grafico.show()
-
-
 def layout_histo(grafico):
+    """ Função para alterar o layout do histograma.
+        Essa função da um nome de título ao gráfico,
+        nome aos eixos x e y do gráfico e
+        altera o tamanho da fonte"""
     grafico.update_layout(
                       dict(title='Ánalise de Frequência do Bitcoin', titlefont_size=25),
                       xaxis=dict(title='Preço Histórico $', titlefont_size=18, tickfont_size=12),
                       yaxis=dict(title='Quantidade', titlefont_size=18, tickfont_size=12))
+    return grafico.show()
+
+
+def layout_box(grafico):
+    """ Função para alterar o layout do gráfico boxplot.
+        Essa função da um nome de título ao gráfico,
+        nome aos eixos x e y do gráfico e
+        altera o tamanho da fonte"""
+    grafico.update_layout(
+        dict(title='Ánalise de variação de preço de fechamento do Bitcoin', titlefont_size=25),
+        xaxis=dict(title='Meses', titlefont_size=18, tickfont_size=12),
+        yaxis=dict(title='Valores $', titlefont_size=18, tickfont_size=12))
+
     return grafico.show()
