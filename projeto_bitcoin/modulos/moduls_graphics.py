@@ -63,6 +63,6 @@ def grafico_histograma() -> None:
 def grafico_box() -> None:
     """Foi realizo uma importação de um metodo get da classe BaseDados
        que retornará uma coluna months contendo o index da base de dados. """
-    
+
     graf_box = px.box(dados.dados_mes(), x=dados.basedados['Months'], y=dados.basedados['Close'])
     layout_box(graf_box)
