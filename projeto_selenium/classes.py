@@ -32,7 +32,7 @@ class Automatizar:
         self.__site = driver
         return self.__site
 
-    def pega_cotacao(self: object) -> str:
+    def pega_cotacao(self) :
         options = Options()
         options.add_argument('--headless')
 
@@ -49,16 +49,18 @@ class Automatizar:
         for empresa in empresas:
             input_busca = driver.find_element(By.ID, 'filled-normal')
             input_busca.send_keys(empresa)
-            sleep(8)
+            sleep(10)
 
             input_busca.send_keys(Keys.ENTER)
-            sleep(4)
+            sleep(5)
 
             span_val = driver.find_element(By.XPATH, '//span[@class="chart-info-val ng-binding"]')
             cotacao_valor = span_val.text
 
             valores.append(cotacao_valor)
             data_hora.append(datetime.now().strftime('%d/%m/%Y'))
+
+            print(f'Valor da cotação da {empresa}: {cotacao_valor}')
 
         dados = {
             'Data-hora': data_hora,
@@ -67,7 +69,8 @@ class Automatizar:
         }
 
         self.__site = pd.DataFrame(dados)
+
         self.__site.set_index('Data-hora', inplace=True)
 
-        return f'Retornando os valor das ações escolhida\n{self.__site}'
+        return self.__site
 
