@@ -15,7 +15,7 @@ Data analysis and visualization projects using the python language. Some librari
 * [Desenvolvedor do projeto](#desenvolvedor-do-projeto)
 
 ### Descrição do projeto
-Nesse projeto foi realizado uma análise do preço de fechamento do bitcoin em um periogo de 5 anos. 
+Nesse projeto foi realizado uma análise do preço de fechamento do bitcoin em um período de 5 anos. 
 Foi criada uma classe chamada Basedados com metodos get para podemos retorna os dados da base de dados. 
 Foi utilizado as bibliotecas pandas, timer e plotly.express para realização de análise, visualização 
 dos dados e visualizações do gráficos. 
